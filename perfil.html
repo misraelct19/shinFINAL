@@ -1,0 +1,136 @@
+<!-- perfil.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil del Estudiante - SHIN</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .perfil {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .avatar-grande {
+      font-size: 4rem;
+    }
+    .logros, .nombramientos {
+      margin-top: 30px;
+    }
+    .logro, .nombramiento {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .logro img {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+    }
+    .volver {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="perfil">
+    <h2 id="nombre">Nombre del estudiante</h2>
+    <div><span id="avatar" class="avatar-grande">🙂</span></div>
+    <p><strong>Grado:</strong> <span id="grado"></span></p>
+    <p><strong>Aikipoints:</strong> <span id="puntos">0</span></p>
+
+    <div class="logros">
+      <h3>🎖 Logros obtenidos</h3>
+      <div id="lista-logros"></div>
+    </div>
+
+    <div class="nombramientos">
+      <h3>👑 Nombramientos del Mes</h3>
+      <div id="lista-nombramientos"></div>
+    </div>
+
+    <div class="volver">
+      <button onclick="window.location.href='index.html'">⬅ Volver al leaderboard</button>
+    </div>
+  </div>
+
+  <script>
+    const jugadores = [
+      { nombre: "Camila Patricia Chávez Bonilla", grado: "5to KYU", avatar: "🦊", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Oliver Aguirre Recio", grado: "8vo KYU", avatar: "🐯", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Maximiliano Diaz de León Diaz", grado: "6to KYU", avatar: "🐸", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Luis Fernando Partida Rivas", grado: "5to KYU", avatar: "🐼", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Thiago Galindo López", grado: "7mo KYU", avatar: "🐨", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Zía Rodríguez Recio", grado: "8vo KYU", avatar: "🦁", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Ian Fabián Valdez Cárdenas", grado: "7mo KYU", avatar: "🦄", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Erick Salazar Hernández", grado: "7mo KYU", avatar: "🐻", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Isaac Salazar Hernández", grado: "7mo KYU", avatar: "🐧", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Valentina Chávez Castro", grado: "6to KYU", avatar: "🦕", puntos: 42,
+        logros: [
+          { nombre: "Caída Perfecta", imagen: "https://via.placeholder.com/50", fecha: "2024-06-01", tipo: "único" },
+          { nombre: "Presente toda la semana", imagen: "https://via.placeholder.com/50", fecha: "2024-06-10", tipo: "acumulativo", cantidad: 2 }
+        ],
+        nombramientos: [
+          { titulo: "Samurai de la disciplina", fecha: "2024-06-01" }
+        ]
+      },
+      { nombre: "María José Heredia Oceguera", grado: "7mo KYU", avatar: "🦉", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Monserrat Meza De La Torre", grado: "7mo KYU", avatar: "🐰", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Mariano Altamirano Escobar", grado: "8vo KYU", avatar: "🦋", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Ariana Celeste Ramírez Rodríguez", grado: "7mo KYU", avatar: "🐵", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Kiara Lilith Ayala Soto", grado: "7mo KYU", avatar: "🐙", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Diego Fierro Elenes", grado: "7mo KYU", avatar: "🦖", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Victoria Gpe. Morales Cárdenas", grado: "7mo KYU", avatar: "🐮", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Ximena Fierro Elenes", grado: "7mo KYU", avatar: "🐺", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Raúl Alexander Aguirre Solís", grado: "", avatar: "🦕", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "José Luis Rangel Ruíz", grado: "", avatar: "🐔", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Jason Alonzo Rangel Ruíz", grado: "", avatar: "🐢", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Bernardo Vargas Zetina", grado: "5to KYU", avatar: "🐝", puntos: 0, logros: [], nombramientos: [] },
+      { nombre: "Sofía Isabella Sarabia De Los Santos", grado: "5to KYU", avatar: "🐙", puntos: 0, logros: [], nombramientos: [] }
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const nombre = params.get("nombre");
+    const jugador = jugadores.find(j => j.nombre === nombre);
+
+    if (jugador) {
+      document.getElementById("nombre").textContent = jugador.nombre;
+      document.getElementById("grado").textContent = jugador.grado;
+      document.getElementById("avatar").textContent = jugador.avatar;
+      document.getElementById("puntos").textContent = jugador.puntos;
+
+      const contLogros = document.getElementById("lista-logros");
+      jugador.logros.forEach(logro => {
+        const div = document.createElement("div");
+        div.className = "logro";
+        div.innerHTML = `
+          <img src="${logro.imagen}" alt="insignia" />
+          <div>
+            <strong>${logro.nombre}</strong><br>
+            Fecha: ${logro.fecha}<br>
+            ${logro.tipo === 'acumulativo' ? `Cantidad: ${logro.cantidad}` : ''}
+          </div>
+        `;
+        contLogros.appendChild(div);
+      });
+
+      const contNombramientos = document.getElementById("lista-nombramientos");
+      jugador.nombramientos.forEach(n => {
+        const div = document.createElement("div");
+        div.className = "nombramiento";
+        div.innerHTML = `<strong>${n.titulo}</strong> – ${n.fecha}`;
+        contNombramientos.appendChild(div);
+      });
+    } else {
+      document.querySelector(".perfil").innerHTML = "<p>Estudiante no encontrado.</p>";
+    }
+  </script>
+</body>
+</html>
