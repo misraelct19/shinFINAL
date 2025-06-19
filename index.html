@@ -1,0 +1,82 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHIN - Academia Aikido Mazatlán</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="inicio">
+    <img src="logotipo aikido.jpg" alt="Logotipo Aikido" class="logo">
+    <h1>合気道 少年部</h1>
+    <h2>Programa Infantil - Aikido Mazatlán</h2>
+    <input type="password" id="clave" placeholder="Ingresa la clave" />
+    <button onclick="validarClave()">Entrar</button>
+    <p id="error" class="error"></p>
+  </div>
+
+  <div class="leaderboard hidden" id="leaderboard">
+    <h2>Tabla de Estudiantes</h2>
+    <div id="jugadores"></div>
+  </div>
+
+  <script>
+    const CLAVE = "dojo2025";
+    const jugadores = [
+      { nombre: "Camila Patricia Chávez Bonilla", grado: "5to KYU", avatar: "🦊", puntos: 0, logros: [] },
+      { nombre: "Oliver Aguirre Recio", grado: "8vo KYU", avatar: "🐯", puntos: 0, logros: [] },
+      { nombre: "Maximiliano Diaz de León Diaz", grado: "6to KYU", avatar: "🐸", puntos: 0, logros: [] },
+      { nombre: "Luis Fernando Partida Rivas", grado: "5to KYU", avatar: "🐼", puntos: 0, logros: [] },
+      { nombre: "Thiago Galindo López", grado: "7mo KYU", avatar: "🐨", puntos: 0, logros: [] },
+      { nombre: "Zía Rodríguez Recio", grado: "8vo KYU", avatar: "🦁", puntos: 0, logros: [] },
+      { nombre: "Ian Fabián Valdez Cárdenas", grado: "7mo KYU", avatar: "🦄", puntos: 0, logros: [] },
+      { nombre: "Erick Salazar Hernández", grado: "7mo KYU", avatar: "🐻", puntos: 0, logros: [] },
+      { nombre: "Isaac Salazar Hernández", grado: "7mo KYU", avatar: "🐧", puntos: 0, logros: [] },
+      { nombre: "Valentina Chávez Castro", grado: "6to KYU", avatar: "🦕", puntos: 0, logros: [] },
+      { nombre: "María José Heredia Oceguera", grado: "7mo KYU", avatar: "🦉", puntos: 0, logros: [] },
+      { nombre: "Monserrat Meza De La Torre", grado: "7mo KYU", avatar: "🐰", puntos: 0, logros: [] },
+      { nombre: "Mariano Altamirano Escobar", grado: "8vo KYU", avatar: "🦋", puntos: 0, logros: [] },
+      { nombre: "Ariana Celeste Ramírez Rodríguez", grado: "7mo KYU", avatar: "🐵", puntos: 0, logros: [] },
+      { nombre: "Kiara Lilith Ayala Soto", grado: "7mo KYU", avatar: "🐙", puntos: 0, logros: [] },
+      { nombre: "Diego Fierro Elenes", grado: "7mo KYU", avatar: "🦖", puntos: 0, logros: [] },
+      { nombre: "Victoria Gpe. Morales Cárdenas", grado: "7mo KYU", avatar: "🐮", puntos: 0, logros: [] },
+      { nombre: "Ximena Fierro Elenes", grado: "7mo KYU", avatar: "🐺", puntos: 0, logros: [] },
+      { nombre: "Raúl Alexander Aguirre Solís", grado: "", avatar: "🦕", puntos: 0, logros: [] },
+      { nombre: "José Luis Rangel Ruíz", grado: "", avatar: "🐔", puntos: 0, logros: [] },
+      { nombre: "Jason Alonzo Rangel Ruíz", grado: "", avatar: "🐢", puntos: 0, logros: [] },
+      { nombre: "Bernardo Vargas Zetina", grado: "5to KYU", avatar: "🐝", puntos: 0, logros: [] },
+      { nombre: "Sofía Isabella Sarabia De Los Santos", grado: "5to KYU", avatar: "🐙", puntos: 0, logros: [] }
+    ];
+
+    function validarClave() {
+      const input = document.getElementById('clave').value;
+      if (input === CLAVE) {
+        document.querySelector('.inicio').classList.add('hidden');
+        document.getElementById('leaderboard').classList.remove('hidden');
+        mostrarLeaderboard();
+      } else {
+        document.getElementById('error').textContent = 'Clave incorrecta';
+      }
+    }
+
+    function mostrarLeaderboard() {
+      const contenedor = document.getElementById('jugadores');
+      jugadores.forEach((j, i) => {
+        const div = document.createElement('div');
+        div.className = 'jugador card';
+        div.innerHTML = `
+          <div>
+            <span class='avatar'>${j.avatar}</span>
+            <strong>${j.nombre}</strong><br>
+            <small>Grado: ${j.grado || 'Sin especificar'}</small><br>
+            <span>${j.puntos} pts</span>
+          </div>
+        `;
+        contenedor.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
