@@ -1,0 +1,142 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Logros - SHIN</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background: #fffaf5;
+    }
+    .bloque {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, button {
+      padding: 8px;
+      margin-top: 5px;
+      width: 100%;
+    }
+    .output {
+      white-space: pre-wrap;
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔐 Panel de Administración SHIN</h2>
+
+  <div id="login">
+    <label>Clave de acceso:</label>
+    <input type="password" id="clave" placeholder="Ingresa la clave" />
+    <button onclick="verificarClave()">Entrar</button>
+    <p id="error" style="color:red;"></p>
+  </div>
+
+  <div id="panel" style="display:none">
+    <div class="bloque">
+      <label>Selecciona un estudiante:</label>
+      <select id="alumno"></select>
+
+      <label>Selecciona un logro:</label>
+      <select id="logro"></select>
+
+      <label>Fecha en que lo obtuvo:</label>
+      <input type="date" id="fecha" />
+
+      <label>Si es recurrente, ¿cuántas veces?</label>
+      <input type="number" id="cantidad" value="1" min="1" />
+
+      <button onclick="generarCodigo()">🎯 Generar código de logro</button>
+    </div>
+
+    <div>
+      <h3>📋 Código generado:</h3>
+      <div class="output" id="resultado">(Aún no generado)</div>
+    </div>
+  </div>
+
+  <script>
+    const CLAVE = "aikitlan00SITIOSHIN";
+
+    const alumnos = [
+      "Camila Patricia Chávez Bonilla", "Oliver Aguirre Recio", "Maximiliano Diaz de León Diaz",
+      "Luis Fernando Partida Rivas", "Thiago Galindo López", "Zía Rodríguez Recio",
+      "Ian Fabián Valdez Cárdenas", "Erick Salazar Hernández", "Isaac Salazar Hernández",
+      "Valentina Chávez Castro", "María José Heredia Oceguera", "Monserrat Meza De La Torre",
+      "Mariano Altamirano Escobar", "Ariana Celeste Ramírez Rodríguez", "Kiara Lilith Ayala Soto",
+      "Diego Fierro Elenes", "Victoria Gpe. Morales Cárdenas", "Ximena Fierro Elenes",
+      "Raúl Alexander Aguirre Solís", "José Luis Rangel Ruíz", "Jason Alonzo Rangel Ruíz",
+      "Bernardo Vargas Zetina", "Sofía Isabella Sarabia De Los Santos"
+    ];
+
+    const logros = [
+      { nombre: "No faltar a ninguna clase en el mes", tipo: "RECURRENTE", puntos: 25 },
+      { nombre: "cada técnica aprendida en omote y ura", tipo: "UNICO", puntos: 5 },
+      { nombre: "aprendio los numeros del 1 al 10 en japones", tipo: "UNICO", puntos: 10 },
+      { nombre: "completó su primer seminario", tipo: "UNICO", puntos: 10 },
+      { nombre: "participó en su primera exhibición", tipo: "UNICO", puntos: 10 },
+      { nombre: "cada seminario", tipo: "RECURRENTE", puntos: 10 },
+      { nombre: "cada exhibicion", tipo: "RECURRENTE", puntos: 10 },
+      { nombre: "cada apoyo como uke en examen", tipo: "RECURRENTE", puntos: 10 }
+    ];
+
+    function verificarClave() {
+      const entrada = document.getElementById("clave").value;
+      if (entrada === CLAVE) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("panel").style.display = "block";
+        cargarDatos();
+      } else {
+        document.getElementById("error").textContent = "Clave incorrecta.";
+      }
+    }
+
+    function cargarDatos() {
+      const selAlumno = document.getElementById("alumno");
+      alumnos.forEach(n => {
+        const op = document.createElement("option");
+        op.textContent = n;
+        selAlumno.appendChild(op);
+      });
+      const selLogro = document.getElementById("logro");
+      logros.forEach(l => {
+        const op = document.createElement("option");
+        op.textContent = `${l.nombre} (${l.tipo}, ${l.puntos} pts)`;
+        op.value = JSON.stringify(l);
+        selLogro.appendChild(op);
+      });
+    }
+
+    function generarCodigo() {
+      const alumno = document.getElementById("alumno").value;
+      const logro = JSON.parse(document.getElementById("logro").value);
+      const fecha = document.getElementById("fecha").value;
+      const cantidad = parseInt(document.getElementById("cantidad").value);
+      const esRec = logro.tipo === "RECURRENTE";
+
+      const frag = `{
+  nombre: "${logro.nombre}",
+  imagen: "(coloca_la_url_de_la_insignia_aqui)",
+  fecha: "${fecha}",
+  tipo: "${logro.tipo}"${esRec ? ",\n  cantidad: " + cantidad : ""}
+}`;
+
+      document.getElementById("resultado").textContent = frag;
+    }
+  </script>
+</body>
+</html>
