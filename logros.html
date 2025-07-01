@@ -1,0 +1,116 @@
+<!-- logros.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de Logros - SHIN</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Baloo 2', sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .logros-container {
+      max-width: 900px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .logro {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .logro img {
+      width: 80px;
+      height: 80px;
+      margin-right: 20px;
+      border-radius: 8px;
+      background: #eee;
+    }
+    .logro .info {
+      flex: 1;
+    }
+    .logro .info h3 {
+      margin: 0;
+    }
+    .logro .info p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="logros-container">
+    <h1>Lista de Logros Disponibles</h1>
+
+    <!-- Lista completa de logros -->
+    <script>
+      const logros = [
+        ["No faltar a ninguna clase en el mes", "RECURRENTE", 25],
+        ["Cada técnica aprendida en omote y ura", "UNICO", 5],
+        ["Aprendió los números del 1 al 10 en japonés", "UNICO", 10],
+        ["Se puede colocar el cinturón solo(a)", "UNICO", 10],
+        ["Shikko adelante, atrás y con giro", "UNICO", 10],
+        ["Aprendió tobu ukemi", "UNICO", 20],
+        ["Aprendió todos los agarres", "UNICO", 20],
+        ["Completó su primer seminario", "UNICO", 10],
+        ["Asistencia a 5 seminarios", "UNICO", 50],
+        ["Asistencia a 10 seminarios", "UNICO", 100],
+        ["Asistencia a 20 seminarios", "UNICO", 200],
+        ["Participó en su primera exhibición", "UNICO", 10],
+        ["Participó en 5 exhibiciones", "UNICO", 50],
+        ["Participó en 10 exhibiciones", "UNICO", 100],
+        ["Participó en 20 exhibiciones", "UNICO", 200],
+        ["Aprendió 20 suburis de jo", "UNICO", 50],
+        ["Aprendió 7 suburi de boken", "UNICO", 20],
+        ["Aprendió 3 katas de jo", "UNICO", 50],
+        ["Invitó un amigo o familiar a clases de Aikido", "RECURRENTE", 5],
+        ["Alcanzó 8vo kyu", "UNICO", 10],
+        ["Alcanzó 7mo kyu", "UNICO", 20],
+        ["Alcanzó 6to kyu", "UNICO", 40],
+        ["Alcanzó 5to kyu", "UNICO", 80],
+        ["Alcanzó 4to kyu", "UNICO", 160],
+        ["Alcanzó 3er kyu", "UNICO", 320],
+        ["1 año de antigüedad en el dojo", "UNICO", 50],
+        ["2 años de antigüedad en el dojo", "UNICO", 100],
+        ["3 años de antigüedad en el dojo", "UNICO", 150],
+        ["4 años de antigüedad en el dojo", "UNICO", 200],
+        ["5 años de antigüedad en el dojo", "UNICO", 250],
+        ["Fue ponente en un seminario", "RECURRENTE", 60],
+        ["Apoyó como uke en examen por primera vez", "UNICO", 10],
+        ["Apoyó como uke en examen 5 veces", "UNICO", 50],
+        ["Apoyó como uke en examen 10 veces", "UNICO", 100],
+        ["Apoyó como uke en examen 20 veces", "UNICO", 200],
+        ["Cada seminario", "RECURRENTE", 10],
+        ["Cada exhibición", "RECURRENTE", 10],
+        ["Cada apoyo como uke en examen", "RECURRENTE", 10]
+      ];
+
+      const container = document.querySelector('.logros-container');
+      logros.forEach(([nombre, tipo, puntos], index) => {
+        const div = document.createElement('div');
+        div.className = 'logro';
+        div.innerHTML = `
+          <img src="img_logros/logro${index + 1}" alt="Imagen pendiente">
+          <div class="info">
+            <h3>${nombre}</h3>
+            <p><strong>Tipo:</strong> ${tipo}</p>
+            <p><strong>Puntos:</strong> ${puntos}</p>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    </script>
+  </div>
+</body>
+</html>
