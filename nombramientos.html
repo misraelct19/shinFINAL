@@ -6,16 +6,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nombramientos del Mes - SHIN</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Baloo 2', cursive, sans-serif;
+      background: #fffaf5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .nombramientos {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffffdd;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .categoria {
+      background: #f0f8ff;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+    .categoria h2 {
+      margin-top: 0;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      padding: 5px 0;
+      font-size: 1.1rem;
+    }
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #d00000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #9b0000;
+    }
+  </style>
 </head>
 <body>
   <div class="nombramientos">
     <h1>🏅 Nombramientos del Mes</h1>
-    <p>Reconocimientos simbólicos otorgados por desempeño destacado en clase.</p>
+    <p style="text-align:center;">Reconocimientos simbólicos otorgados por desempeño destacado en clase.</p>
 
     <div class="categoria">
       <h2>👑 Embajador Aiki</h2>
       <ul>
         <li>– Mariana López</li>
+        <!-- Agrega más alumnos aquí si es necesario -->
       </ul>
     </div>
 
@@ -33,7 +85,9 @@
       </ul>
     </div>
 
-    <button onclick="window.location.href='index.html'">⬅ Volver al leaderboard</button>
+    <div style="text-align: center;">
+      <button onclick="window.location.href='index.html'">⬅ Volver al leaderboard</button>
+    </div>
   </div>
 </body>
 </html>
