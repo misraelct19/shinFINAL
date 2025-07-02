@@ -84,15 +84,48 @@
     ];
 
     const logros = [
-      { nombre: "No faltar a ninguna clase en el mes", tipo: "RECURRENTE", puntos: 25 },
-      { nombre: "cada técnica aprendida en omote y ura", tipo: "UNICO", puntos: 5 },
-      { nombre: "aprendio los numeros del 1 al 10 en japones", tipo: "UNICO", puntos: 10 },
-      { nombre: "completó su primer seminario", tipo: "UNICO", puntos: 10 },
-      { nombre: "participó en su primera exhibición", tipo: "UNICO", puntos: 10 },
-      { nombre: "cada seminario", tipo: "RECURRENTE", puntos: 10 },
-      { nombre: "cada exhibicion", tipo: "RECURRENTE", puntos: 10 },
-      { nombre: "cada apoyo como uke en examen", tipo: "RECURRENTE", puntos: 10 }
-    ];
+      "No faltar a ninguna clase en el mes",
+      "cada técnica aprendida en omote y ura",
+      "aprendio los numeros del 1 al 10 en japones",
+      "se puede colocar el cinturón solo(a)",
+      "shikko adelante, atrás y con giro",
+      "aprendio tobu ukemi",
+      "aprendio todos los agarres",
+      "asistencia a 5 seminarios",
+      "asistencia a 10 seminarios",
+      "asistencia a 20 seminarios",
+      "completó su primer seminario",
+      "participó en su primera exhibición",
+      "participó en 5 exhibiciones",
+      "participó en 10 exhibiciones",
+      "participó en 20 exhibiciones",
+      "aprendió 20 suburis de jo",
+      "aprendió 7 suburi de boken",
+      "aprendió 3 katas de jo",
+      "invitó un amigo o familiar a clases de Aikido",
+      "alcanzo 8vo kyu",
+      "alcanzo 7mo kyu",
+      "alcanzo 6to kyu",
+      "alcanzo 5to kyu",
+      "alcanzo 4to kyu",
+      "alcanzo 3er kyu",
+      "1 año de antigüedad en el dojo",
+      "2 años de antigüedad en el dojo",
+      "3 años de antigüedad en el dojo",
+      "5 años de antigüedad en el dojo",
+      "fue ponente en un seminario",
+      "apoyó como uke en examen por primera vez",
+      "apoyó como uke en examen 5 veces",
+      "apoyó como uke en examen 10 veces",
+      "apoyó como uke en examen 20 veces",
+      "cada seminario",
+      "cada exhibicion",
+      "cada apoyo como uke en examen"
+    ].map((nombre, index) => {
+      const tipo = nombre.includes("cada") || nombre.includes("invitó") || nombre.includes("No faltar") ? "RECURRENTE" : "UNICO";
+      const puntos = [25,5,10,10,10,20,20,50,100,200,10,10,50,100,200,50,50,50,5,10,20,40,80,160,320,50,100,150,200,60,10,50,100,200,10,10,10][index];
+      return { nombre, tipo, puntos };
+    });
 
     function verificarClave() {
       const entrada = document.getElementById("clave").value;
@@ -113,9 +146,10 @@
         selAlumno.appendChild(op);
       });
       const selLogro = document.getElementById("logro");
-      logros.forEach(l => {
+      logros.forEach((l, index) => {
         const op = document.createElement("option");
         op.textContent = `${l.nombre} (${l.tipo}, ${l.puntos} pts)`;
+        l.imagen = `img_logros/logro${index + 1}.png`;
         op.value = JSON.stringify(l);
         selLogro.appendChild(op);
       });
@@ -130,7 +164,7 @@
 
       const frag = `{
   nombre: "${logro.nombre}",
-  imagen: "(coloca_la_url_de_la_insignia_aqui)",
+  imagen: "${logro.imagen}",
   fecha: "${fecha}",
   tipo: "${logro.tipo}"${esRec ? ",\n  cantidad: " + cantidad : ""}
 }`;
@@ -140,3 +174,5 @@
   </script>
 </body>
 </html>
+
+ 
