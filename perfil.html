@@ -83,48 +83,47 @@
 
   <script>
     const logrosDef = [
-    { nombre: "No faltar a ninguna clase en el mes", tipo: "RECURRENTE", puntos: 25 },
-    { nombre: "cada técnica aprendida en omote y ura", tipo: "UNICO", puntos: 5 },
-    { nombre: "aprendio los numeros del 1 al 10 en japones", tipo: "UNICO", puntos: 10 },
-    { nombre: "se puede colocar el cinturón solo(a)", tipo: "UNICO", puntos: 10 },
-    { nombre: "shikko adelante, atrás y con giro", tipo: "UNICO", puntos: 10 },
-    { nombre: "aprendio tobu ukemi", tipo: "UNICO", puntos: 20 },
-    { nombre: "aprendio todos los agarres", tipo: "UNICO", puntos: 20 },
-    { nombre: "completó su primer seminario", tipo: "UNICO", puntos: 10 },
-    { nombre: "asistencia a 5 seminarios", tipo: "UNICO", puntos: 20 },
-    { nombre: "asistencia a 10 seminarios", tipo: "UNICO", puntos: 50 },
-    { nombre: "asistencia a 20 seminarios", tipo: "UNICO", puntos: 100 },
-    { nombre: "participó en su primera exhibición", tipo: "UNICO", puntos: 10 },
-    { nombre: "participó en 5 exhibiciones", tipo: "UNICO", puntos: 50 },
-    { nombre: "participó en 10 exhibiciones", tipo: "UNICO", puntos: 100 },
-    { nombre: "participó en 20 exhibiciones", tipo: "UNICO", puntos: 200 },
-    { nombre: "aprendió 20 suburis de jo", tipo: "UNICO", puntos: 50 },
-    { nombre: "aprendió 7 suburi de boken", tipo: "UNICO", puntos: 20 },
-    { nombre: "aprendió 3 katas de jo", tipo: "UNICO", puntos: 50 },
-    { nombre: "invitó un amigo o familiar a clases de Aikido", tipo: "RECURRENTE", puntos: 5 },
-    { nombre: "alcanzo 8vo kyu", tipo: "UNICO", puntos: 10 },
-    { nombre: "alcanzo 7mo kyu", tipo: "UNICO", puntos: 20 },
-    { nombre: "alcanzo 6to kyu", tipo: "UNICO", puntos: 40 },
-    { nombre: "alcanzo 5to kyu", tipo: "UNICO", puntos: 80 },
-    { nombre: "alcanzo 4to kyu", tipo: "UNICO", puntos: 160 },
-    { nombre: "alcanzo 3er kyu", tipo: "UNICO", puntos: 320 },
-    { nombre: "1 año de antigüedad en el dojo", tipo: "UNICO", puntos: 50 },
-    { nombre: "2 años de antigüedad en el dojo", tipo: "UNICO", puntos: 100 },
-    { nombre: "3 años de antigüedad en el dojo", tipo: "UNICO", puntos: 150 },
-    { nombre: "5 años de antigüedad en el dojo", tipo: "UNICO", puntos: 200 },
-    { nombre: "fue ponente en un seminario", tipo: "UNICO", puntos: 60 },
-    { nombre: "apoyó como uke en examen por primera vez", tipo: "UNICO", puntos: 10 },
-    { nombre: "apoyó como uke en examen 5 veces", tipo: "UNICO", puntos: 50 },
-    { nombre: "apoyó como uke en examen 10 veces", tipo: "UNICO", puntos: 100 },
-    { nombre: "apoyó como uke en examen 20 veces", tipo: "UNICO", puntos: 200 },
-    { nombre: "cada exhibicion", tipo: "RECURRENTE", puntos: 10 },
-    { nombre: "cada seminario", tipo: "RECURRENTE", puntos: 10 },
-    { nombre: "cada examen", tipo: "RECURRENTE", puntos: 10 },
-    { nombre: "cada apoyo como uke en examen", tipo: "RECURRENTE", puntos: 10 }
-  ];
+      { nombre: "No faltar a ninguna clase en el mes", tipo: "RECURRENTE", puntos: 25 },
+      { nombre: "cada técnica aprendida en omote y ura", tipo: "UNICO", puntos: 5 },
+      { nombre: "aprendio los numeros del 1 al 10 en japones", tipo: "UNICO", puntos: 10 },
+      { nombre: "se puede colocar el cinturón solo(a)", tipo: "UNICO", puntos: 10 },
+      { nombre: "shikko adelante, atrás y con giro", tipo: "UNICO", puntos: 10 },
+      { nombre: "aprendio tobu ukemi", tipo: "UNICO", puntos: 20 },
+      { nombre: "aprendio todos los agarres", tipo: "UNICO", puntos: 20 },
+      { nombre: "completó su primer seminario", tipo: "UNICO", puntos: 10 },
+      { nombre: "asistencia a 5 seminarios", tipo: "UNICO", puntos: 20 },
+      { nombre: "asistencia a 10 seminarios", tipo: "UNICO", puntos: 50 },
+      { nombre: "asistencia a 20 seminarios", tipo: "UNICO", puntos: 100 },
+      { nombre: "participó en su primera exhibición", tipo: "UNICO", puntos: 10 },
+      { nombre: "participó en 5 exhibiciones", tipo: "UNICO", puntos: 50 },
+      { nombre: "participó en 10 exhibiciones", tipo: "UNICO", puntos: 100 },
+      { nombre: "participó en 20 exhibiciones", tipo: "UNICO", puntos: 200 },
+      { nombre: "aprendió 20 suburis de jo", tipo: "UNICO", puntos: 50 },
+      { nombre: "aprendió 7 suburi de boken", tipo: "UNICO", puntos: 20 },
+      { nombre: "aprendió 3 katas de jo", tipo: "UNICO", puntos: 50 },
+      { nombre: "invitó un amigo o familiar a clases de Aikido", tipo: "RECURRENTE", puntos: 5 },
+      { nombre: "alcanzo 8vo kyu", tipo: "UNICO", puntos: 10 },
+      { nombre: "alcanzo 7mo kyu", tipo: "UNICO", puntos: 20 },
+      { nombre: "alcanzo 6to kyu", tipo: "UNICO", puntos: 40 },
+      { nombre: "alcanzo 5to kyu", tipo: "UNICO", puntos: 80 },
+      { nombre: "alcanzo 4to kyu", tipo: "UNICO", puntos: 160 },
+      { nombre: "alcanzo 3er kyu", tipo: "UNICO", puntos: 320 },
+      { nombre: "1 año de antigüedad en el dojo", tipo: "UNICO", puntos: 50 },
+      { nombre: "2 años de antigüedad en el dojo", tipo: "UNICO", puntos: 100 },
+      { nombre: "3 años de antigüedad en el dojo", tipo: "UNICO", puntos: 150 },
+      { nombre: "5 años de antigüedad en el dojo", tipo: "UNICO", puntos: 200 },
+      { nombre: "fue ponente en un seminario", tipo: "UNICO", puntos: 60 },
+      { nombre: "apoyó como uke en examen por primera vez", tipo: "UNICO", puntos: 10 },
+      { nombre: "apoyó como uke en examen 5 veces", tipo: "UNICO", puntos: 50 },
+      { nombre: "apoyó como uke en examen 10 veces", tipo: "UNICO", puntos: 100 },
+      { nombre: "apoyó como uke en examen 20 veces", tipo: "UNICO", puntos: 200 },
+      { nombre: "cada exhibicion", tipo: "RECURRENTE", puntos: 10 },
+      { nombre: "cada seminario", tipo: "RECURRENTE", puntos: 10 },
+      { nombre: "cada examen", tipo: "RECURRENTE", puntos: 10 },
+      { nombre: "cada apoyo como uke en examen", tipo: "RECURRENTE", puntos: 10 }
+    ];
 
-    
-    const jugadores = [
+    const jugadores = [ 
       { nombre: "Camila Patricia Chávez Bonilla", grado: "5to KYU", avatar: "🦊", puntos: 0, logros: [], nombramientos: [] },
       { nombre: "Oliver Aguirre Recio", grado: "8vo KYU", avatar: "🐯", puntos: 0, logros: [], nombramientos: [] },
       { nombre: "Maximiliano Diaz de León Diaz", grado: "6to KYU", avatar: "🐸", puntos: 0, logros: [], nombramientos: [] },
@@ -155,6 +154,13 @@
     const jugador = jugadores.find(j => j.nombre === nombre);
 
     if (jugador) {
+      jugador.puntos = jugador.logros.reduce((total, logro) => {
+        const def = logrosDef.find(l => l.nombre === logro.nombre);
+        if (!def) return total;
+        const veces = (def.tipo === "RECURRENTE" && logro.cantidad) ? logro.cantidad : 1;
+        return total + (def.puntos * veces);
+      }, 0);
+
       document.getElementById("nombre").textContent = jugador.nombre;
       document.getElementById("grado").textContent = jugador.grado;
       document.getElementById("avatar").textContent = jugador.avatar;
@@ -164,14 +170,14 @@
       jugador.logros.forEach(logro => {
         const div = document.createElement("div");
         div.className = "logro";
-        div.innerHTML = 
+        div.innerHTML = `
           <img src="${logro.imagen}" alt="insignia" />
           <div>
             <strong>${logro.nombre}</strong><br>
             Fecha: ${logro.fecha}<br>
-            ${logro.tipo === 'acumulativo' ? Cantidad: ${logro.cantidad} : ''}
+            ${logro.tipo === 'RECURRENTE' ? `Cantidad: ${logro.cantidad}` : ''}
           </div>
-        ;
+        `;
         contLogros.appendChild(div);
       });
 
@@ -179,7 +185,7 @@
       jugador.nombramientos.forEach(n => {
         const div = document.createElement("div");
         div.className = "nombramiento";
-        div.innerHTML = <strong>${n.titulo}</strong> – ${n.fecha};
+        div.innerHTML = `<strong>${n.titulo}</strong> – ${n.fecha}`;
         contNombramientos.appendChild(div);
       });
     } else {
