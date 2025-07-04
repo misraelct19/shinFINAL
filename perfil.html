@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Perfil del Estudiante - SHIN</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <style>
     .perfil {
       max-width: 700px;
@@ -17,6 +17,9 @@
     }
     .avatar-grande {
       font-size: 4rem;
+      display: block;
+      margin-bottom: 10px;
+      text-align: center;
     }
     .logros, .nombramientos {
       margin-top: 30px;
@@ -36,6 +39,7 @@
     }
     .volver {
       margin-top: 30px;
+      text-align: center;
     }
     .btn-logros {
       background-color: #007BFF;
@@ -51,12 +55,20 @@
     .btn-logros:hover {
       background-color: #0056b3;
     }
+    .fechas-lista {
+      margin-top: 5px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .fechas-lista span {
+      display: block;
+    }
   </style>
 </head>
 <body>
   <div class="perfil">
     <h2 id="nombre">Nombre del estudiante</h2>
-    <div><span id="avatar" class="avatar-grande">🙂</span></div>
+    <span id="avatar" class="avatar-grande">🙂</span>
     <p><strong>Grado:</strong> <span id="grado"></span></p>
     <p><strong>Aikipoints:</strong> <span id="puntos">0</span></p>
 
@@ -70,11 +82,9 @@
       <div id="lista-nombramientos"></div>
     </div>
 
-    <div style="text-align: center;">
-      <button onclick="window.location.href='logros.html'" class="btn-logros">
-        📘 Ver todos los logros disponibles
-      </button>
-    </div>
+    <button onclick="window.location.href='logros.html'" class="btn-logros">
+      📘 Ver todos los logros disponibles
+    </button>
 
     <div class="volver">
       <button onclick="window.location.href='index.html'">⬅ Volver al leaderboard</button>
@@ -82,7 +92,7 @@
   </div>
 
   <script>
-    const logrosDef = [
+const logrosDef = [
       { nombre: "No faltar a ninguna clase en el mes", tipo: "RECURRENTE", puntos: 25 },
       { nombre: "cada técnica aprendida en omote y ura", tipo: "UNICO", puntos: 5 },
       { nombre: "aprendio los numeros del 1 al 10 en japones", tipo: "UNICO", puntos: 10 },
@@ -150,34 +160,49 @@
     ];
 
     const params = new URLSearchParams(window.location.search);
-    const nombre = params.get("nombre");
-    const jugador = jugadores.find(j => j.nombre === nombre);
+    const nombreParam = params.get("nombre");
+    const jugador = jugadores.find(j => j.nombre === nombreParam);
 
-    if (jugador) {
-      jugador.puntos = jugador.logros.reduce((total, logro) => {
-        const def = logrosDef.find(l => l.nombre === logro.nombre);
-        if (!def) return total;
-        const veces = (def.tipo === "RECURRENTE" && logro.cantidad) ? logro.cantidad : 1;
-        return total + (def.puntos * veces);
-      }, 0);
-
+    if (!jugador) {
+      document.body.innerHTML = "<p>Estudiante no encontrado.</p>";
+    } else {
       document.getElementById("nombre").textContent = jugador.nombre;
-      document.getElementById("grado").textContent = jugador.grado;
       document.getElementById("avatar").textContent = jugador.avatar;
-      document.getElementById("puntos").textContent = jugador.puntos;
+      document.getElementById("grado").textContent = jugador.grado;
+
+      let totalPuntos = 0;
+
+      jugador.logros.forEach(logro => {
+        const definicion = logrosDef.find(def => def.nombre === logro.nombre);
+        if (definicion) {
+          const veces = logro.fechas ? logro.fechas.length : 1;
+          totalPuntos += definicion.puntos * veces;
+        }
+      });
+
+      document.getElementById("puntos").textContent = totalPuntos;
 
       const contLogros = document.getElementById("lista-logros");
+
       jugador.logros.forEach(logro => {
         const div = document.createElement("div");
         div.className = "logro";
+
+        let fechasHTML = "";
+        if (logro.tipo === "RECURRENTE" && logro.fechas.length > 1) {
+          fechasHTML = `<div class="fechas-lista">${logro.fechas.map(f => `<span>📅 ${f}</span>`).join("")}</div>`;
+        } else {
+          fechasHTML = `<div class="fechas-lista"><span>📅 ${logro.fechas[0]}</span></div>`;
+        }
+
         div.innerHTML = `
           <img src="${logro.imagen}" alt="insignia" />
           <div>
-            <strong>${logro.nombre}</strong><br>
-            Fecha: ${logro.fecha}<br>
-            ${logro.tipo === 'RECURRENTE' ? `Cantidad: ${logro.cantidad}` : ''}
+            <strong>${logro.nombre}</strong>
+            ${fechasHTML}
           </div>
         `;
+
         contLogros.appendChild(div);
       });
 
@@ -185,12 +210,11 @@
       jugador.nombramientos.forEach(n => {
         const div = document.createElement("div");
         div.className = "nombramiento";
-        div.innerHTML = `<strong>${n.titulo}</strong> – ${n.fecha}`;
+        div.textContent = `${n.titulo} – ${n.fecha}`;
         contNombramientos.appendChild(div);
       });
-    } else {
-      document.querySelector(".perfil").innerHTML = "<p>Estudiante no encontrado.</p>";
     }
   </script>
 </body>
 </html>
+
