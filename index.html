@@ -7,6 +7,25 @@
   <title>SHIN - Academia Aikido Mazatlán</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+  <style>
+    .hidden { display: none; }
+    .jugador.card {
+      background: #fdfdfd;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .perfil-link {
+      text-decoration: none;
+      color: inherit;
+    }
+    .avatar {
+      font-size: 2rem;
+      margin-right: 10px;
+    }
+  </style>
 </head>
 <body>
   <div class="inicio">
@@ -27,30 +46,30 @@
 
   <script>
     const CLAVE = "dojo2025";
-    const jugadores = [
-      { nombre: "Camila Patricia Chávez Bonilla", grado: "5to KYU", avatar: "🦊", puntos: 0 },
-      { nombre: "Oliver Aguirre Recio", grado: "8vo KYU", avatar: "🐯", puntos: 0 },
-      { nombre: "Maximiliano Diaz de León Diaz", grado: "6to KYU", avatar: "🐸", puntos: 0 },
-      { nombre: "Luis Fernando Partida Rivas", grado: "5to KYU", avatar: "🐼", puntos: 0 },
-      { nombre: "Thiago Galindo López", grado: "7mo KYU", avatar: "🐨", puntos: 0 },
-      { nombre: "Zía Rodríguez Recio", grado: "8vo KYU", avatar: "🦁", puntos: 0 },
-      { nombre: "Ian Fabián Valdez Cárdenas", grado: "7mo KYU", avatar: "🦄", puntos: 0 },
-      { nombre: "Erick Salazar Hernández", grado: "7mo KYU", avatar: "🐻", puntos: 0 },
-      { nombre: "Isaac Salazar Hernández", grado: "7mo KYU", avatar: "🐧", puntos: 0 },
-      { nombre: "Valentina Chávez Castro", grado: "6to KYU", avatar: "🦕", puntos: 0 },
-      { nombre: "María José Heredia Oceguera", grado: "7mo KYU", avatar: "🦉", puntos: 0 },
-      { nombre: "Monserrat Meza De La Torre", grado: "7mo KYU", avatar: "🐰", puntos: 0 },
-      { nombre: "Mariano Altamirano Escobar", grado: "8vo KYU", avatar: "🦋", puntos: 0 },
-      { nombre: "Ariana Celeste Ramírez Rodríguez", grado: "7mo KYU", avatar: "🐵", puntos: 0 },
-      { nombre: "Kiara Lilith Ayala Soto", grado: "7mo KYU", avatar: "🐙", puntos: 0 },
-      { nombre: "Diego Fierro Elenes", grado: "7mo KYU", avatar: "🦖", puntos: 0 },
-      { nombre: "Victoria Gpe. Morales Cárdenas", grado: "7mo KYU", avatar: "🐮", puntos: 0 },
-      { nombre: "Ximena Fierro Elenes", grado: "7mo KYU", avatar: "🐺", puntos: 0 },
-      { nombre: "Raúl Alexander Aguirre Solís", grado: "", avatar: "🦕", puntos: 0 },
-      { nombre: "José Luis Rangel Ruíz", grado: "", avatar: "🐔", puntos: 0 },
-      { nombre: "Jason Alonzo Rangel Ruíz", grado: "", avatar: "🐢", puntos: 0 },
-      { nombre: "Bernardo Vargas Zetina", grado: "5to KYU", avatar: "🐝", puntos: 0 },
-      { nombre: "Sofía Isabella Sarabia De Los Santos", grado: "5to KYU", avatar: "🐙", puntos: 0 }
+    const alumnos = [
+      { nombre: "Camila Patricia Chávez Bonilla", grado: "5to KYU", avatar: "🦊" },
+      { nombre: "Oliver Aguirre Recio", grado: "8vo KYU", avatar: "🐯" },
+      { nombre: "Maximiliano Diaz de León Diaz", grado: "6to KYU", avatar: "🐸" },
+      { nombre: "Luis Fernando Partida Rivas", grado: "5to KYU", avatar: "🐼" },
+      { nombre: "Thiago Galindo López", grado: "7mo KYU", avatar: "🐨" },
+      { nombre: "Zía Rodríguez Recio", grado: "8vo KYU", avatar: "🦁" },
+      { nombre: "Ian Fabián Valdez Cárdenas", grado: "7mo KYU", avatar: "🦄" },
+      { nombre: "Erick Salazar Hernández", grado: "7mo KYU", avatar: "🐻" },
+      { nombre: "Isaac Salazar Hernández", grado: "7mo KYU", avatar: "🐧" },
+      { nombre: "Valentina Chávez Castro", grado: "6to KYU", avatar: "🦕" },
+      { nombre: "María José Heredia Oceguera", grado: "7mo KYU", avatar: "🦉" },
+      { nombre: "Monserrat Meza De La Torre", grado: "7mo KYU", avatar: "🐰" },
+      { nombre: "Mariano Altamirano Escobar", grado: "8vo KYU", avatar: "🦋" },
+      { nombre: "Ariana Celeste Ramírez Rodríguez", grado: "7mo KYU", avatar: "🐵" },
+      { nombre: "Kiara Lilith Ayala Soto", grado: "7mo KYU", avatar: "🐙" },
+      { nombre: "Diego Fierro Elenes", grado: "7mo KYU", avatar: "🦖" },
+      { nombre: "Victoria Gpe. Morales Cárdenas", grado: "7mo KYU", avatar: "🐮" },
+      { nombre: "Ximena Fierro Elenes", grado: "7mo KYU", avatar: "🐺" },
+      { nombre: "Raúl Alexander Aguirre Solís", grado: "", avatar: "🦕" },
+      { nombre: "José Luis Rangel Ruíz", grado: "", avatar: "🐔" },
+      { nombre: "Jason Alonzo Rangel Ruíz", grado: "", avatar: "🐢" },
+      { nombre: "Bernardo Vargas Zetina", grado: "5to KYU", avatar: "🐝" },
+      { nombre: "Sofía Isabella Sarabia De Los Santos", grado: "5to KYU", avatar: "🐙" }
     ];
 
     function validarClave() {
@@ -58,16 +77,43 @@
       if (input === CLAVE) {
         document.querySelector(".inicio").classList.add("hidden");
         document.getElementById("leaderboard").classList.remove("hidden");
-        mostrarLeaderboard();
+        cargarPuntosDesdePerfiles();
       } else {
         document.getElementById("error").textContent = "Clave incorrecta";
       }
     }
 
-    function mostrarLeaderboard() {
+    function cargarPuntosDesdePerfiles() {
+      const jugadoresConPuntos = [];
+      let pendientes = alumnos.length;
+
+      alumnos.forEach(alumno => {
+        const url = `perfil.html?nombre=${encodeURIComponent(alumno.nombre)}`;
+        fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            const puntosText = doc.getElementById("puntos")?.textContent || "0";
+            const puntos = parseInt(puntosText);
+            jugadoresConPuntos.push({ ...alumno, puntos });
+          })
+          .catch(() => {
+            jugadoresConPuntos.push({ ...alumno, puntos: 0 });
+          })
+          .finally(() => {
+            pendientes--;
+            if (pendientes === 0) {
+              mostrarLeaderboard(jugadoresConPuntos);
+            }
+          });
+      });
+    }
+
+    function mostrarLeaderboard(jugadores) {
       const contenedor = document.getElementById("jugadores");
       contenedor.innerHTML = "";
-      jugadores.sort((a, b) => b.puntos - a.puntos).forEach((j) => {
+      jugadores.sort((a, b) => b.puntos - a.puntos).forEach(j => {
         const div = document.createElement("div");
         div.className = "jugador card";
         div.innerHTML = `
@@ -86,3 +132,4 @@
   </script>
 </body>
 </html>
+
