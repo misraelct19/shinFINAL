@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel de Administración - SHIN</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       font-family: sans-serif;
@@ -21,16 +21,8 @@
       border-radius: 12px;
       background: #fff;
     }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 10px;
-    }
-    input, select, button {
-      padding: 8px;
-      margin-top: 5px;
-      width: 100%;
-    }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    input, select, button { padding: 8px; margin-top: 5px; width: 100%; }
     .output {
       white-space: pre-wrap;
       background: #f0f0f0;
@@ -41,7 +33,7 @@
   </style>
 </head>
 <body>
-  <h2>🔐 Panel de Administración SHIN</h2>
+  <h2>🔐 Panel de Administración - SHIN</h2>
 
   <div id="login">
     <label>Clave de acceso:</label>
@@ -52,7 +44,7 @@
 
   <div id="panel" style="display:none">
 
-    <!-- Bloque para logros -->
+    <!-- Bloque de asignar logro -->
     <div class="bloque">
       <h3>🎯 Asignar Logro</h3>
       <label>Selecciona un estudiante:</label>
@@ -64,16 +56,16 @@
       <label>Fecha en que lo obtuvo:</label>
       <input type="date" id="fecha" />
 
-      <label>Si es recurrente, ¿cuántas veces?</label>
+      <label>Si es recurrente, número de veces obtenidas (se crearán múltiples fechas):</label>
       <input type="number" id="cantidad" value="1" min="1" />
 
-      <button onclick="generarCodigo()">✅ Generar código de logro</button>
+      <button onclick="generarCodigoLogro()">✅ Generar código de logro</button>
 
       <h4>Código generado:</h4>
-      <div class="output" id="resultado">(Aún no generado)</div>
+      <div class="output" id="resultadoLogro">(Aún no generado)</div>
     </div>
 
-    <!-- Bloque para nombramientos -->
+    <!-- Bloque de nombramiento -->
     <div class="bloque">
       <h3>👑 Asignar Nombramiento del Mes</h3>
       <label>Selecciona un estudiante:</label>
@@ -87,9 +79,9 @@
       </select>
 
       <label>Fecha del nombramiento:</label>
-      <input type="date" id="fechaNombramiento" />
+      <input type="date" id="fechaNom" />
 
-      <button onclick="generarNombramiento()">🏅 Generar código de nombramiento</button>
+      <button onclick="generarCodigoNombramiento()">🏅 Generar código de nombramiento</button>
 
       <h4>Código generado:</h4>
       <div class="output" id="resultadoNombramiento">(Aún no generado)</div>
@@ -121,7 +113,7 @@
       { nombre: "aprendio todos los agarres", tipo: "UNICO", puntos: 20 },
       { nombre: "completó su primer seminario", tipo: "UNICO", puntos: 10 },
       { nombre: "asistencia a 5 seminarios", tipo: "UNICO", puntos: 50 },
-      { nombre: "asistencia a 10 seminatios", tipo: "UNICO", puntos: 100 },
+      { nombre: "asistencia a 10 seminarios", tipo: "UNICO", puntos: 100 },
       { nombre: "asistencia a 20 seminarios", tipo: "UNICO", puntos: 200 },
       { nombre: "participó en su primera exhibición", tipo: "UNICO", puntos: 10 },
       { nombre: "participó en 5 exhibiciones", tipo: "UNICO", puntos: 50 },
@@ -140,12 +132,12 @@
       { nombre: "1 año de antigüedad en el dojo", tipo: "UNICO", puntos: 50 },
       { nombre: "2 años de antigüedad en el dojo", tipo: "UNICO", puntos: 100 },
       { nombre: "3 años de antigüedad en el dojo", tipo: "UNICO", puntos: 150 },
-      { nombre: "4 años de antiguadad en el dojo", tipo: "UNICO", puntos: 200 },
+      { nombre: "4 años de antigüedad en el dojo", tipo: "UNICO", puntos: 200 },
       { nombre: "5 años de antigüedad en el dojo", tipo: "UNICO", puntos: 250 },
       { nombre: "fue ponente en un seminario", tipo: "RECURRENTE", puntos: 60 },
       { nombre: "apoyó como uke en examen por primera vez", tipo: "UNICO", puntos: 10 },
       { nombre: "apoyó como uke en examen 5 veces", tipo: "UNICO", puntos: 50 },
-      { nombre: "apoyó como uje en examen 10 veces", tipo: "UNICO", puntos: 100 },
+      { nombre: "apoyó como uke en examen 10 veces", tipo: "UNICO", puntos: 100 },
       { nombre: "apoyó como uke en examen 20 veces", tipo: "UNICO", puntos: 200 },
       { nombre: "cada seminario", tipo: "RECURRENTE", puntos: 10 },
       { nombre: "cada exhibicion", tipo: "RECURRENTE", puntos: 10 },
@@ -153,68 +145,53 @@
     ];
 
     function verificarClave() {
-      const entrada = document.getElementById("clave").value;
-      if (entrada === CLAVE) {
+      if (document.getElementById("clave").value === CLAVE) {
         document.getElementById("login").style.display = "none";
         document.getElementById("panel").style.display = "block";
-        cargarDatos();
+        cargarSelectors();
       } else {
         document.getElementById("error").textContent = "Clave incorrecta.";
       }
     }
 
-    function cargarDatos() {
-      const selAlumno = document.getElementById("alumno");
-      const selAlumno2 = document.getElementById("alumnoNombramiento");
-      alumnos.forEach(n => {
-        const op = document.createElement("option");
-        op.textContent = n;
-        selAlumno.appendChild(op);
-
-        const op2 = document.createElement("option");
-        op2.textContent = n;
-        selAlumno2.appendChild(op2);
+    function cargarSelectors() {
+      alumnos.forEach(nombre => {
+        document.getElementById("alumno").innerHTML += `<option>${nombre}</option>`;
+        document.getElementById("alumnoNombramiento").innerHTML += `<option>${nombre}</option>`;
       });
-
-      const selLogro = document.getElementById("logro");
-      logros.forEach((l, index) => {
-        const op = document.createElement("option");
-        op.textContent = `${l.nombre} (${l.tipo}, ${l.puntos} pts)`;
-        op.value = JSON.stringify({ ...l, imagen: `img_logros/logro${index + 1}.png` });
-        selLogro.appendChild(op);
+      logros.forEach((l, i) => {
+        document.getElementById("logro").innerHTML += 
+          `<option value='${JSON.stringify({...l, imagen: `img_logros/logro${i+1}.png`})}'>${l.nombre} (${l.tipo})</option>`;
       });
     }
 
-    function generarCodigo() {
-      const alumno = document.getElementById("alumno").value;
+    function generarCodigoLogro() {
       const logro = JSON.parse(document.getElementById("logro").value);
       const fecha = document.getElementById("fecha").value;
-      const cantidad = parseInt(document.getElementById("cantidad").value);
-      const esRec = logro.tipo === "RECURRENTE";
-
-      const frag = `{
-  nombre: "${logro.nombre}",
-  imagen: "${logro.imagen}",
-  fecha: "${fecha}",
-  tipo: "${logro.tipo}"${esRec ? ",\n  cantidad: " + cantidad : ""}
-}`;
-
-      document.getElementById("resultado").textContent = frag;
+      const cantidad = parseInt(document.getElementById("cantidad").value) || 1;
+      const fechas = Array.from({length: cantidad}, (_, k) => {
+        let d = new Date(fecha);
+        d.setDate(d.getDate() + k*7);
+        return d.toISOString().split('T')[0];
+      });
+      const frag = JSON.stringify({
+        nombre: logro.nombre,
+        imagen: logro.imagen,
+        tipo: logro.tipo,
+        fechas: fechas
+      }, null, 2);
+      document.getElementById("resultadoLogro").textContent = frag;
     }
 
-    function generarNombramiento() {
-      const alumno = document.getElementById("alumnoNombramiento").value;
+    function generarCodigoNombramiento() {
       const titulo = document.getElementById("nombramiento").value;
-      const fecha = document.getElementById("fechaNombramiento").value;
-
-      const frag = `{
-  titulo: "${titulo}",
-  fecha: "${fecha}"
-}`;
+      const fecha = document.getElementById("fechaNom").value;
+      const frag = JSON.stringify({ titulo, fecha }, null, 2);
       document.getElementById("resultadoNombramiento").textContent = frag;
     }
   </script>
 </body>
 </html>
+
 
  
