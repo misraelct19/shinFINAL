@@ -43,53 +43,54 @@
     <div id="jugadores"></div>
   </div>
 
-  <script>
-    const CLAVE = "dojo2025";
-    const JSON_URL = "https://github.com/misraelct19/shinFINAL/edit/main/puntos.json";
+ <script>
+  const CLAVE = "dojo2025";
 
-    function validarClave() {
-      const input = document.getElementById("clave").value;
-      if (input === CLAVE) {
-        document.querySelector(".inicio").classList.add("hidden");
-        document.getElementById("leaderboard").classList.remove("hidden");
-        cargarDatos();
-      } else {
-        document.getElementById("error").textContent = "Clave incorrecta";
-      }
+  function validarClave() {
+    const input = document.getElementById("clave").value;
+    if (input === CLAVE) {
+      document.querySelector(".inicio").classList.add("hidden");
+      document.getElementById("leaderboard").classList.remove("hidden");
+      cargarDesdeJSON();
+    } else {
+      document.getElementById("error").textContent = "Clave incorrecta";
     }
+  }
 
-    function cargarDatos() {
-      fetch(JSON_URL)
-        .then(res => res.json())
-        .then(jugadores => {
-          jugadores.sort((a, b) => b.puntos - a.puntos);
-          mostrarLeaderboard(jugadores);
-        })
-        .catch(() => {
-          document.getElementById("jugadores").innerHTML = "<p>No se pudo cargar el archivo de puntos.</p>";
-        });
-    }
-
-    function mostrarLeaderboard(jugadores) {
-      const contenedor = document.getElementById("jugadores");
-      contenedor.innerHTML = "";
-
-      jugadores.forEach((j) => {
-        const div = document.createElement("div");
-        div.className = "jugador card";
-        div.innerHTML = `
-          <a href="perfil.html?nombre=${encodeURIComponent(j.nombre)}" class="perfil-link">
-            <div>
-              <span class='avatar'>${j.avatar}</span>
-              <strong>${j.nombre}</strong><br>
-              <small>Grado: ${j.grado || 'Sin especificar'}</small><br>
-              <span>${j.puntos} pts</span>
-            </div>
-          </a>
-        `;
-        contenedor.appendChild(div);
+  function cargarDesdeJSON() {
+    fetch('https://raw.githubusercontent.com/misraelct19/shinFINAL/main/puntos.json')
+      .then(res => {
+        if (!res.ok) throw new Error('Error al cargar');
+        return res.json();
+      })
+      .then(data => mostrarLeaderboard(data))
+      .catch(() => {
+        document.getElementById("jugadores").innerHTML = "<p>No se pudo cargar el archivo de puntos.</p>";
       });
-    }
-  </script>
-</body>
+  }
+
+  function mostrarLeaderboard(jugadores) {
+    const contenedor = document.getElementById("jugadores");
+    contenedor.innerHTML = "";
+
+    jugadores.sort((a, b) => b.puntos - a.puntos);
+
+    jugadores.forEach((j) => {
+      const div = document.createElement("div");
+      div.className = "jugador card";
+      div.innerHTML = `
+        <a href="perfil.html?nombre=${encodeURIComponent(j.nombre)}" class="perfil-link">
+          <div>
+            <span class='avatar'>${j.avatar}</span>
+            <strong>${j.nombre}</strong><br>
+            <small>Grado: ${j.grado || 'Sin especificar'}</small><br>
+            <span>${j.puntos} pts</span>
+          </div>
+        </a>
+      `;
+      contenedor.appendChild(div);
+    });
+  }
+   </script>
+  </body>
 </html>
