@@ -45,64 +45,36 @@
 
   <script>
     const CLAVE = "dojo2025";
-
-    const alumnos = [
-      { nombre: "Camila Patricia Chávez Bonilla", grado: "5to KYU", avatar: "🦊" },
-      { nombre: "Oliver Aguirre Recio", grado: "8vo KYU", avatar: "🐯" },
-      { nombre: "Maximiliano Diaz de León Diaz", grado: "6to KYU", avatar: "🐸" },
-      { nombre: "Luis Fernando Partida Rivas", grado: "5to KYU", avatar: "🐼" },
-      { nombre: "Thiago Galindo López", grado: "7mo KYU", avatar: "🐨" },
-      { nombre: "Zía Rodríguez Recio", grado: "8vo KYU", avatar: "🦁" },
-      { nombre: "Ian Fabián Valdez Cárdenas", grado: "7mo KYU", avatar: "🦄" },
-      { nombre: "Erick Salazar Hernández", grado: "7mo KYU", avatar: "🐻" },
-      { nombre: "Isaac Salazar Hernández", grado: "7mo KYU", avatar: "🐧" },
-      { nombre: "Valentina Chávez Castro", grado: "6to KYU", avatar: "🦕" },
-      { nombre: "María José Heredia Oceguera", grado: "7mo KYU", avatar: "🦉" },
-      { nombre: "Monserrat Meza De La Torre", grado: "7mo KYU", avatar: "🐰" },
-      { nombre: "Mariano Altamirano Escobar", grado: "8vo KYU", avatar: "🦋" },
-      { nombre: "Ariana Celeste Ramírez Rodríguez", grado: "7mo KYU", avatar: "🐵" },
-      { nombre: "Kiara Lilith Ayala Soto", grado: "7mo KYU", avatar: "🐙" },
-      { nombre: "Diego Fierro Elenes", grado: "7mo KYU", avatar: "🦖" },
-      { nombre: "Victoria Gpe. Morales Cárdenas", grado: "7mo KYU", avatar: "🐮" },
-      { nombre: "Ximena Fierro Elenes", grado: "7mo KYU", avatar: "🐺" },
-      { nombre: "Raúl Alexander Aguirre Solís", grado: "", avatar: "🦕" },
-      { nombre: "José Luis Rangel Ruíz", grado: "", avatar: "🐔" },
-      { nombre: "Jason Alonzo Rangel Ruíz", grado: "", avatar: "🐢" },
-      { nombre: "Bernardo Vargas Zetina", grado: "5to KYU", avatar: "🐝" },
-      { nombre: "Sofía Isabella Sarabia De Los Santos", grado: "5to KYU", avatar: "🐙" }
-    ];
+    const JSON_URL = "https://raw.githubusercontent.com/misraelct19/shinFINAL/refs/heads/main/puntos.json";
 
     function validarClave() {
       const input = document.getElementById("clave").value;
       if (input === CLAVE) {
         document.querySelector(".inicio").classList.add("hidden");
         document.getElementById("leaderboard").classList.remove("hidden");
-        mostrarLeaderboard();
+        cargarDatos();
       } else {
         document.getElementById("error").textContent = "Clave incorrecta";
       }
     }
 
-    function mostrarLeaderboard() {
+    function cargarDatos() {
+      fetch(JSON_URL)
+        .then(res => res.json())
+        .then(jugadores => {
+          jugadores.sort((a, b) => b.puntos - a.puntos);
+          mostrarLeaderboard(jugadores);
+        })
+        .catch(() => {
+          document.getElementById("jugadores").innerHTML = "<p>No se pudo cargar el archivo de puntos.</p>";
+        });
+    }
+
+    function mostrarLeaderboard(jugadores) {
       const contenedor = document.getElementById("jugadores");
       contenedor.innerHTML = "";
 
-      // Leer puntos desde localStorage
-      alumnos.forEach(j => {
-        const datos = localStorage.getItem('aikipoints_' + j.nombre);
-        if (datos) {
-          const obj = JSON.parse(datos);
-          j.puntos = obj.puntos;
-        } else {
-          j.puntos = 0;
-        }
-      });
-
-      // Ordenar por puntos
-      alumnos.sort((a, b) => b.puntos - a.puntos);
-
-      // Crear tarjetas
-      alumnos.forEach((j) => {
+      jugadores.forEach((j) => {
         const div = document.createElement("div");
         div.className = "jugador card";
         div.innerHTML = `
