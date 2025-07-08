@@ -110,26 +110,36 @@
       });
     }
 
-    function mostrarLeaderboard(jugadores) {
-      const contenedor = document.getElementById("jugadores");
-      contenedor.innerHTML = "";
-      jugadores.sort((a, b) => b.puntos - a.puntos).forEach(j => {
-        const div = document.createElement("div");
-        div.className = "jugador card";
-        div.innerHTML = `
-          <a href="perfil.html?nombre=${encodeURIComponent(j.nombre)}" class="perfil-link">
-            <div>
-              <span class='avatar'>${j.avatar}</span>
-              <strong>${j.nombre}</strong><br>
-              <small>Grado: ${j.grado || 'Sin especificar'}</small><br>
-              <span>${j.puntos} pts</span>
-            </div>
-          </a>
-        `;
-        contenedor.appendChild(div);
-      });
-    }
-  </script>
-</body>
-</html>
+    function mostrarLeaderboard() {
+  const contenedor = document.getElementById("jugadores");
+  contenedor.innerHTML = "";
 
+  // Cargar puntos reales desde localStorage
+  jugadores.forEach(j => {
+    const datos = localStorage.getItem('aikipoints_' + j.nombre);
+    if (datos) {
+      const obj = JSON.parse(datos);
+      j.puntos = obj.puntos;
+    }
+  });
+
+  // Ordenar por puntos
+  jugadores.sort((a, b) => b.puntos - a.puntos);
+
+  // Mostrar tarjetas
+  jugadores.forEach((j) => {
+    const div = document.createElement("div");
+    div.className = "jugador card";
+    div.innerHTML = `
+      <a href="perfil.html?nombre=${encodeURIComponent(j.nombre)}" class="perfil-link">
+        <div>
+          <span class='avatar'>${j.avatar}</span>
+          <strong>${j.nombre}</strong><br>
+          <small>Grado: ${j.grado || 'Sin especificar'}</small><br>
+          <span>${j.puntos} pts</span>
+        </div>
+      </a>
+    `;
+    contenedor.appendChild(div);
+  });
+}
