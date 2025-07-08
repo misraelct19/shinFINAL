@@ -1,0 +1,142 @@
+{
+  "alumnos": [
+    {
+      "nombre": "Camila Patricia Chávez Bonilla",
+      "avatar": "🦊",
+      "grado": "5to KYU",
+      "puntos": 100
+    },
+    {
+      "nombre": "Oliver Aguirre Recio",
+      "avatar": "🐯",
+      "grado": "8vo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Maximiliano Diaz de León Diaz",
+      "avatar": "🐸",
+      "grado": "6to KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Luis Fernando Partida Rivas",
+      "avatar": "🐼",
+      "grado": "5to KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Thiago Galindo López",
+      "avatar": "🐨",
+      "grado": "7mo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Zía Rodríguez Recio",
+      "avatar": "🦁",
+      "grado": "8vo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Ian Fabián Valdez Cárdenas",
+      "avatar": "🦄",
+      "grado": "7mo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Erick Salazar Hernández",
+      "avatar": "🐻",
+      "grado": "7mo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Isaac Salazar Hernández",
+      "avatar": "🐧",
+      "grado": "7mo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Valentina Chávez Castro",
+      "avatar": "🦕",
+      "grado": "6to KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "María José Heredia Oceguera",
+      "avatar": "🦉",
+      "grado": "7mo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Monserrat Meza De La Torre",
+      "avatar": "🐰",
+      "grado": "7mo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Mariano Altamirano Escobar",
+      "avatar": "🦋",
+      "grado": "8vo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Ariana Celeste Ramírez Rodríguez",
+      "avatar": "🐵",
+      "grado": "7mo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Kiara Lilith Ayala Soto",
+      "avatar": "🐙",
+      "grado": "7mo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Diego Fierro Elenes",
+      "avatar": "🦖",
+      "grado": "7mo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Victoria Gpe. Morales Cárdenas",
+      "avatar": "🐮",
+      "grado": "7mo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Ximena Fierro Elenes",
+      "avatar": "🐺",
+      "grado": "7mo KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Raúl Alexander Aguirre Solís",
+      "avatar": "🦕",
+      "grado": "",
+      "puntos": 0
+    },
+    {
+      "nombre": "José Luis Rangel Ruíz",
+      "avatar": "🐔",
+      "grado": "",
+      "puntos": 0
+    },
+    {
+      "nombre": "Jason Alonzo Rangel Ruíz",
+      "avatar": "🐢",
+      "grado": "",
+      "puntos": 0
+    },
+    {
+      "nombre": "Bernardo Vargas Zetina",
+      "avatar": "🐝",
+      "grado": "5to KYU",
+      "puntos": 0
+    },
+    {
+      "nombre": "Sofía Isabella Sarabia De Los Santos",
+      "avatar": "🐙",
+      "grado": "5to KYU",
+      "puntos": 0
+    }
+  ]
+}
