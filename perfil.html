@@ -201,6 +201,17 @@ const logrosDef = [
 
       document.getElementById("puntos").textContent = totalPuntos;
 
+       
+  localStorage.setItem(
+    'aikipoints_' + jugador.nombre,
+    JSON.stringify({
+      puntos: jugador.puntos,
+      logros: jugador.logros,
+      nombramientos: jugador.nombramientos
+    })
+  );
+
+
       const contLogros = document.getElementById("lista-logros");
 
       jugador.logros.forEach(logro => {
