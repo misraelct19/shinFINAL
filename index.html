@@ -112,7 +112,7 @@
     }
 
     function mostrarLeaderboard() {
-  const contenedor = document.getElementById("jugadores");
+  const contenedor = document.getElementById("alumnos");
   contenedor.innerHTML = "";
 
   // Cargar puntos reales desde localStorage
@@ -125,12 +125,12 @@
   });
 
   // Ordenar por puntos
-  jugadores.sort((a, b) => b.puntos - a.puntos);
+  alumnos.sort((a, b) => b.puntos - a.puntos);
 
   // Mostrar tarjetas
-  jugadores.forEach((j) => {
+  alumnos.forEach((j) => {
     const div = document.createElement("div");
-    div.className = "jugador card";
+    div.className = "alumno card";
     div.innerHTML = `
       <a href="perfil.html?nombre=${encodeURIComponent(j.nombre)}" class="perfil-link">
         <div>
