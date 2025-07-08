@@ -104,7 +104,8 @@
           .finally(() => {
             pendientes--;
             if (pendientes === 0) {
-              mostrarLeaderboard(jugadoresConPuntos);
+                mostrarLeaderboard();
+};
             }
           });
       });
@@ -115,7 +116,7 @@
   contenedor.innerHTML = "";
 
   // Cargar puntos reales desde localStorage
-  jugadores.forEach(j => {
+  alumnos.forEach(j => {
     const datos = localStorage.getItem('aikipoints_' + j.nombre);
     if (datos) {
       const obj = JSON.parse(datos);
