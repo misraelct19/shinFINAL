@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,7 +25,6 @@
       font-size: 2rem;
       margin-right: 10px;
     }
-    .error { color: red; }
   </style>
 </head>
 <body>
@@ -77,53 +77,70 @@
       if (input === CLAVE) {
         document.querySelector(".inicio").classList.add("hidden");
         document.getElementById("leaderboard").classList.remove("hidden");
-        cargarYMostrarLeaderboard();
+        cargarPuntosDesdePerfiles();
       } else {
         document.getElementById("error").textContent = "Clave incorrecta";
       }
     }
 
-    function cargarYMostrarLeaderboard() {
-      fetch('https://raw.githubusercontent.com/misraelct19/shinFINAL/refs/heads/main/puntos.json')
-        .then(res => {
-          if (!res.ok) throw new Error("Error al cargar JSON");
-          return res.json();
-        })
-        .then(data => {
-          // data es un array de { nombre, puntos }
-          alumnos.forEach(al => {
-            const encontrado = data.find(e => e.nombre === al.nombre);
-            al.puntos = encontrado ? encontrado.puntos : 0;
+    function cargarPuntosDesdePerfiles() {
+      const jugadoresConPuntos = [];
+      let pendientes = alumnos.length;
+
+      alumnos.forEach(alumno => {
+        const url = `perfil.html?nombre=${encodeURIComponent(alumno.nombre)}`;
+        fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            const puntosText = doc.getElementById("puntos")?.textContent || "0";
+            const puntos = parseInt(puntosText);
+            jugadoresConPuntos.push({ ...alumno, puntos });
+          })
+          .catch(() => {
+            jugadoresConPuntos.push({ ...alumno, puntos: 0 });
+          })
+          .finally(() => {
+            pendientes--;
+            if (pendientes === 0) {
+                mostrarLeaderboard();
+};
+            }
           });
-          mostrarLeaderboard();
-        })
-        .catch(err => {
-          document.getElementById("jugadores").innerHTML = "<p>No se pudo cargar el archivo de puntos.</p>";
-          console.error(err);
-        });
+      });
     }
 
     function mostrarLeaderboard() {
-      const contenedor = document.getElementById("jugadores");
-      contenedor.innerHTML = "";
-      alumnos.sort((a, b) => (b.puntos || 0) - (a.puntos || 0));
-      alumnos.forEach(j => {
-        const div = document.createElement("div");
-        div.className = "jugador card";
-        div.innerHTML = `
-          <a href="perfil.html?nombre=${encodeURIComponent(j.nombre)}" class="perfil-link">
-            <div>
-              <span class='avatar'>${j.avatar}</span>
-              <strong>${j.nombre}</strong><br>
-              <small>Grado: ${j.grado || 'Sin especificar'}</small><br>
-              <span>${j.puntos || 0} pts</span>
-            </div>
-          </a>
-        `;
-        contenedor.appendChild(div);
-      });
-    }
-  </script>
-</body>
-</html>
+  const contenedor = document.getElementById("alumnos");
+  contenedor.innerHTML = "";
 
+  // Cargar puntos reales desde localStorage
+  alumnos.forEach(j => {
+    const datos = localStorage.getItem('aikipoints_' + j.nombre);
+    if (datos) {
+      const obj = JSON.parse(datos);
+      j.puntos = obj.puntos;
+    }
+  });
+
+  // Ordenar por puntos
+  alumnos.sort((a, b) => b.puntos - a.puntos);
+
+  // Mostrar tarjetas
+  alumnos.forEach((j) => {
+    const div = document.createElement("div");
+    div.className = "alumno card";
+    div.innerHTML = `
+      <a href="perfil.html?nombre=${encodeURIComponent(j.nombre)}" class="perfil-link">
+        <div>
+          <span class='avatar'>${j.avatar}</span>
+          <strong>${j.nombre}</strong><br>
+          <small>Grado: ${j.grado || 'Sin especificar'}</small><br>
+          <span>${j.puntos} pts</span>
+        </div>
+      </a>
+    `;
+    contenedor.appendChild(div);
+  });
+}
