@@ -58,7 +58,7 @@
   }
 
   function cargarDesdeJSON() {
-    fetch('https://raw.githubusercontent.com/misraelct19/shinFINAL/main/puntos.json')
+    fetch('https://raw.githubusercontent.com/misraelct19/shinFINAL/refs/heads/main/puntos.json')
       .then(res => {
         if (!res.ok) throw new Error('Error al cargar');
         return res.json();
