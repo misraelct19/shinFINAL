@@ -203,13 +203,14 @@ const logrosDef = [
 
        
   localStorage.setItem(
-    'aikipoints_' + jugador.nombre,
-    JSON.stringify({
-      puntos: jugador.puntos,
-      logros: jugador.logros,
-      nombramientos: jugador.nombramientos
-    })
-  );
+  'aikipoints_' + jugador.nombre,
+  JSON.stringify({
+    puntos: totalPuntos,
+    logros: jugador.logros,
+    nombramientos: jugador.nombramientos
+  })
+);
+
 
 
       const contLogros = document.getElementById("lista-logros");
