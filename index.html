@@ -1,123 +1,66 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SHIN - Academia Aikido Mazatlán</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
-  <style>
-    .hidden { display: none; }
-    .jugador.card {
-      background: #fdfdfd;
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+<script>
+  const CLAVE = "dojo2025";
+
+  const alumnos = [
+    { nombre: "Camila Patricia Chávez Bonilla", grado: "5to KYU", avatar: "🦊", puntos: 100 },
+    { nombre: "Oliver Aguirre Recio", grado: "8vo KYU", avatar: "🐯", puntos: 45 },
+    { nombre: "Maximiliano Diaz de León Diaz", grado: "6to KYU", avatar: "🐸", puntos: 0 },
+    { nombre: "Luis Fernando Partida Rivas", grado: "5to KYU", avatar: "🐼", puntos: 10 },
+    { nombre: "Thiago Galindo López", grado: "7mo KYU", avatar: "🐨", puntos: 0 },
+    { nombre: "Zía Rodríguez Recio", grado: "8vo KYU", avatar: "🦁", puntos: 5 },
+    { nombre: "Ian Fabián Valdez Cárdenas", grado: "7mo KYU", avatar: "🦄", puntos: 15 },
+    { nombre: "Erick Salazar Hernández", grado: "7mo KYU", avatar: "🐻", puntos: 0 },
+    { nombre: "Isaac Salazar Hernández", grado: "7mo KYU", avatar: "🐧", puntos: 0 },
+    { nombre: "Valentina Chávez Castro", grado: "6to KYU", avatar: "🦕", puntos: 0 },
+    { nombre: "María José Heredia Oceguera", grado: "7mo KYU", avatar: "🦉", puntos: 0 },
+    { nombre: "Monserrat Meza De La Torre", grado: "7mo KYU", avatar: "🐰", puntos: 0 },
+    { nombre: "Mariano Altamirano Escobar", grado: "8vo KYU", avatar: "🦋", puntos: 0 },
+    { nombre: "Ariana Celeste Ramírez Rodríguez", grado: "7mo KYU", avatar: "🐵", puntos: 0 },
+    { nombre: "Kiara Lilith Ayala Soto", grado: "7mo KYU", avatar: "🐙", puntos: 0 },
+    { nombre: "Diego Fierro Elenes", grado: "7mo KYU", avatar: "🦖", puntos: 0 },
+    { nombre: "Victoria Gpe. Morales Cárdenas", grado: "7mo KYU", avatar: "🐮", puntos: 0 },
+    { nombre: "Ximena Fierro Elenes", grado: "7mo KYU", avatar: "🐺", puntos: 0 },
+    { nombre: "Raúl Alexander Aguirre Solís", grado: "", avatar: "🦕", puntos: 0 },
+    { nombre: "José Luis Rangel Ruíz", grado: "", avatar: "🐔", puntos: 0 },
+    { nombre: "Jason Alonzo Rangel Ruíz", grado: "", avatar: "🐢", puntos: 0 },
+    { nombre: "Bernardo Vargas Zetina", grado: "5to KYU", avatar: "🐝", puntos: 0 },
+    { nombre: "Sofía Isabella Sarabia De Los Santos", grado: "5to KYU", avatar: "🐙", puntos: 0 }
+  ];
+
+  function validarClave() {
+    const input = document.getElementById("clave").value;
+    if (input === CLAVE) {
+      document.querySelector(".inicio").classList.add("hidden");
+      document.getElementById("leaderboard").classList.remove("hidden");
+      mostrarLeaderboard();
+    } else {
+      document.getElementById("error").textContent = "Clave incorrecta";
     }
-    .perfil-link {
-      text-decoration: none;
-      color: inherit;
-    }
-    .avatar {
-      font-size: 2rem;
-      margin-right: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div class="inicio">
-    <img src="logotipo aikido.jpg" alt="Logotipo Aikido" class="logo">
-    <h1>合気道 マサトラン</h1>
-    <h2>Tabla de puntuaciones - Grupos Infantiles de Aikido Mazatlán</h2>
-    <h3>Sistema Holístico de Instrucción para Niños</h3>
-    <input type="password" id="clave" placeholder="Ingresa la clave" />
-    <button onclick="validarClave()">Entrar</button>
-    <p id="error" class="error"></p>
-  </div>
+  }
 
-  <div class="leaderboard hidden" id="leaderboard">
-    <h2>Tabla de Estudiantes</h2>
-    <button onclick="window.location.href='nombramientos.html'" class="btn-nombramientos">👑 Ver Nombramientos del Mes</button>
-    <div id="jugadores"></div>
-  </div>
+  function mostrarLeaderboard() {
+    const contenedor = document.getElementById("jugadores");
+    contenedor.innerHTML = "";
 
-  <script>
-    const CLAVE = "dojo2025";
+    // Ordenar por puntos
+    alumnos.sort((a, b) => b.puntos - a.puntos);
 
-    const alumnos = [
-      { nombre: "Camila Patricia Chávez Bonilla", grado: "5to KYU", avatar: "🦊" },
-      { nombre: "Oliver Aguirre Recio", grado: "8vo KYU", avatar: "🐯" },
-      { nombre: "Maximiliano Diaz de León Diaz", grado: "6to KYU", avatar: "🐸" },
-      { nombre: "Luis Fernando Partida Rivas", grado: "5to KYU", avatar: "🐼" },
-      { nombre: "Thiago Galindo López", grado: "7mo KYU", avatar: "🐨" },
-      { nombre: "Zía Rodríguez Recio", grado: "8vo KYU", avatar: "🦁" },
-      { nombre: "Ian Fabián Valdez Cárdenas", grado: "7mo KYU", avatar: "🦄" },
-      { nombre: "Erick Salazar Hernández", grado: "7mo KYU", avatar: "🐻" },
-      { nombre: "Isaac Salazar Hernández", grado: "7mo KYU", avatar: "🐧" },
-      { nombre: "Valentina Chávez Castro", grado: "6to KYU", avatar: "🦕" },
-      { nombre: "María José Heredia Oceguera", grado: "7mo KYU", avatar: "🦉" },
-      { nombre: "Monserrat Meza De La Torre", grado: "7mo KYU", avatar: "🐰" },
-      { nombre: "Mariano Altamirano Escobar", grado: "8vo KYU", avatar: "🦋" },
-      { nombre: "Ariana Celeste Ramírez Rodríguez", grado: "7mo KYU", avatar: "🐵" },
-      { nombre: "Kiara Lilith Ayala Soto", grado: "7mo KYU", avatar: "🐙" },
-      { nombre: "Diego Fierro Elenes", grado: "7mo KYU", avatar: "🦖" },
-      { nombre: "Victoria Gpe. Morales Cárdenas", grado: "7mo KYU", avatar: "🐮" },
-      { nombre: "Ximena Fierro Elenes", grado: "7mo KYU", avatar: "🐺" },
-      { nombre: "Raúl Alexander Aguirre Solís", grado: "", avatar: "🦕" },
-      { nombre: "José Luis Rangel Ruíz", grado: "", avatar: "🐔" },
-      { nombre: "Jason Alonzo Rangel Ruíz", grado: "", avatar: "🐢" },
-      { nombre: "Bernardo Vargas Zetina", grado: "5to KYU", avatar: "🐝" },
-      { nombre: "Sofía Isabella Sarabia De Los Santos", grado: "5to KYU", avatar: "🐙" }
-    ];
+    // Crear tarjetas
+    alumnos.forEach((j) => {
+      const div = document.createElement("div");
+      div.className = "jugador card";
+      div.innerHTML = `
+        <a href="perfil.html?nombre=${encodeURIComponent(j.nombre)}" class="perfil-link">
+          <div>
+            <span class='avatar'>${j.avatar}</span>
+            <strong>${j.nombre}</strong><br>
+            <small>Grado: ${j.grado || 'Sin especificar'}</small><br>
+            <span>${j.puntos} pts</span>
+          </div>
+        </a>
+      `;
+      contenedor.appendChild(div);
+    });
+  }
+</script>
 
-    function validarClave() {
-      const input = document.getElementById("clave").value;
-      if (input === CLAVE) {
-        document.querySelector(".inicio").classList.add("hidden");
-        document.getElementById("leaderboard").classList.remove("hidden");
-        mostrarLeaderboard();
-      } else {
-        document.getElementById("error").textContent = "Clave incorrecta";
-      }
-    }
-
-    function mostrarLeaderboard() {
-      const contenedor = document.getElementById("jugadores");
-      contenedor.innerHTML = "";
-
-      // Leer puntos desde localStorage
-      alumnos.forEach(j => {
-        const datos = localStorage.getItem('aikipoints_' + j.nombre);
-        if (datos) {
-          const obj = JSON.parse(datos);
-          j.puntos = obj.puntos;
-        } else {
-          j.puntos = 0;
-        }
-      });
-
-      // Ordenar por puntos
-      alumnos.sort((a, b) => b.puntos - a.puntos);
-
-      // Crear tarjetas
-      alumnos.forEach((j) => {
-        const div = document.createElement("div");
-        div.className = "jugador card";
-        div.innerHTML = `
-          <a href="perfil.html?nombre=${encodeURIComponent(j.nombre)}" class="perfil-link">
-            <div>
-              <span class='avatar'>${j.avatar}</span>
-              <strong>${j.nombre}</strong><br>
-              <small>Grado: ${j.grado || 'Sin especificar'}</small><br>
-              <span>${j.puntos} pts</span>
-            </div>
-          </a>
-        `;
-        contenedor.appendChild(div);
-      });
-    }
-  </script>
-</body>
-</html>
