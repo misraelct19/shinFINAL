@@ -251,6 +251,87 @@ const logrosDef = [
         contNombramientos.appendChild(div);
       });
     }
+
+    const tecnicasPorGrado = {
+  "8vo KYU": [
+    "Okuri ashi, Ayumi ashi, Tsugi ashi",
+    "Shomen uchi, Yokomen uchi, Tsuki",
+    "Ushiro ukemi, Mae ukemi",
+    "Seiza, Kiza, Agura, Tate, Migi hanmi no kamae, Hidari hanmi no kamae"
+  ],
+  "7mo KYU": [
+    "Mawari ashi, Ryoho mawari ashi, tenshin",
+    "Shikko (Mae ni, Ushiro ni, ryoho mawari ashi)",
+    "Ushiro yoko ukemi",
+    "Tai no henka",
+    "Katatedori, Ai hanmi katatedori (katate kosa dori), kata dori",
+    "Ai hanmi katatedori ikkyo. OMOTE/URA",
+    "Zagi kokyu ho"
+  ],
+  "6to KYU": [
+    "Aplicación de desplazamientos contra shomen uchi",
+    "Ushiro ryotekubidori, ushiro ryokatadori, ushiro eri dori, ushiro katate kubishime",
+    "Mae geri, mawashi geri",
+    "Katatedori uchi/ soto tenkan",
+    "Shomen uchi ikkyo OMOTE/URA",
+    "Katatedori sumi otoshi OMOTE/URA",
+    "Katatedori uchi/soto kokyu nage",
+    "Zagi kokyu ho"
+  ],
+  "5to KYU": [
+    "Todas las formas de sujeción frontal y por la espalda",
+    "Desplazamientos contra tsuki",
+    "Ushiro ryotekubidori ikkyo OMOTE/URA",
+    "Katatedori shiho nage OMOTE/URA",
+    "Shomen uchi irimi nage OMOTE/URA",
+    "Katadori, shomen uchi ikkyo – nikyo OMOTE/URA",
+    "Tsuki kote gaeshi OMOTE/URA",
+    "Suwari waza: katadori ikkyo – nikyo. OMOTE/URA"
+  ],
+  "4to KYU": [
+    "Desplazamientos contra yokomen uchi",
+    "Ushiro ryotekubidori kote gaeshi, kokyu nage",
+    "Yokomen uchi shiho nage OMOTE/URA",
+    "Shomen uchi sankyo, kote gaeshi OMOTE/URA",
+    "Tsuki irimi nage OMOTE/URA",
+    "Katatedori kokyu ho",
+    "Morotedori kokyu nage",
+    "Suwari waza: Shomen uchi ikkyo – sankyo OMOTE/URA"
+  ],
+  "3er KYU": [
+    "Yokomen uchi irimi nage OMOTE/URA",
+    "Ushiro ryotekubidori sankyo OMOTE/URA",
+    "Ryotedori tenchi nage",
+    "Ryotedori shiho nage OMOTE/URA",
+    "Katatedori uchi/soto kaiten nage OMOTE/URA",
+    "Katadori men uchi Kokyu nage",
+    "Suwari waza: Shomen uchi irimi nage, kote gaeshi",
+    "Hanmi handachi waza: katatedori shiho nage, katatedori uchi/soto kaiten nage OMOTE/URA",
+    "Jiyu waza: Katatedori, Shomen uchi"
+  ]
+};
+
+function mostrarTecnicasSiguientes() {
+  const niveles = ["8vo KYU", "7mo KYU", "6to KYU", "5to KYU", "4to KYU", "3er KYU"];
+  const gradoActual = jugador.grado;
+
+  const siguienteGrado = niveles[niveles.indexOf(gradoActual) + 1];
+  const tecnicas = tecnicasPorGrado[siguienteGrado];
+
+  const lista = document.getElementById("lista-tecnicas");
+  if (tecnicas) {
+    tecnicas.forEach(t => {
+      const li = document.createElement("li");
+      li.textContent = t;
+      lista.appendChild(li);
+    });
+  } else {
+    lista.innerHTML = "<li>¡Felicidades! Este es el último grado en el sistema infantil.</li>";
+  }
+}
+
+mostrarTecnicasSiguientes();
+
   </script>
 </body>
 </html>
