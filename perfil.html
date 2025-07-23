@@ -203,12 +203,19 @@ const actualIndex = gradosProgreso.findIndex(g => g.grado === jugador.grado);
 const siguienteGrado = gradosProgreso[actualIndex + 1];
 
 if (siguienteGrado) {
-  const asistenciasActuales = jugador.asistencias || 0;
-  const requeridasPrevias = gradosProgreso[actualIndex].total;
-  const requeridasSiguiente = siguienteGrado.total;
-  const progreso = Math.max(0, asistenciasActuales - requeridasPrevias);
-  const total = requeridasSiguiente - requeridasPrevias;
-  const porcentaje = Math.min(100, Math.round((progreso / total) * 100));
+ const asistenciasNecesarias = {
+  "8vo KYU": 20,
+  "7mo KYU": 40,
+  "6to KYU": 65,
+  "5to KYU": 90,
+  "4to KYU": 120,
+  "3er KYU": 165
+};
+
+const total = asistenciasNecesarias[siguienteGrado.grado];
+const progreso = Math.min(jugador.asistencias || 0, total);
+const porcentaje = Math.round((progreso / total) * 100);
+
 
   const barra = document.createElement("div");
   barra.className = "progreso";
