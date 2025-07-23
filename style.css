@@ -90,3 +90,24 @@ button:hover {
 .tecnicas ul li {
   margin-bottom: 6px;
 }
+
+.progreso {
+  margin-top: 30px;
+  padding: 20px;
+  background: #e7f3ff;
+  border-radius: 10px;
+}
+.barra-externa {
+  width: 100%;
+  background: #ccc;
+  height: 25px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+.barra-interna {
+  height: 100%;
+  background: #007BFF;
+  transition: width 0.5s ease;
+}
+
