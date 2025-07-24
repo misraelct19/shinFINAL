@@ -226,7 +226,9 @@ const porcentaje = Math.round((progreso / total) * 100);
     </div>
     <p>${progreso} / ${total} asistencias (${porcentaje}%)</p>
   `;
-  document.querySelector(".perfil").appendChild(barra);
+ const contenedorTecnicas = document.getElementById("siguiente-grado");
+document.querySelector(".perfil").insertBefore(barra, contenedorTecnicas);
+;
 }
 
 
